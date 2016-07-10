@@ -1,0 +1,34 @@
+
+			<div class="text-center jumbotron">
+					<h2>Cut MP3 files into multiple tracks.</h2>
+					<h3>Split and download tracks with few clicks</h3>
+				</div>
+				<div class="text-center">
+					<form id="upload_audio">
+						<label class="btn btn-warning btn-lg input-file">
+							<span ng-show="!uploading">
+								<i class="glyphicon glyphicon-upload"></i>
+								&nbsp;&nbsp;Upload Audio File
+								<input name="file" type="file" accept="audio/mp3" onchange="angular.element(this).scope().uploadAudio(this.files[0])" >
+							</span>
+							<span ng-show="uploading">
+								<i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i> 
+								&nbsp;&nbsp;Uploading&hellip; 
+							</span>
+						</label>
+					</form>
+					<br>
+						<div class="alert alert-warning alert-dismissible fade in" role="alert" ng-show="error_upload"> 
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button> 
+							The file hasn't been uploaded
+						</div> 
+						<div class="alert alert-warning alert-dismissible fade in" role="alert" ng-show="error_format"> 
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button> 
+							Upload only MP3 files
+						</div> 						
+					
+				</div>

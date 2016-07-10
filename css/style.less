@@ -1,0 +1,149 @@
+@appName: #FC8C05;
+@regionBorder: #9B9B9B;
+
+/*main */
+
+[ng\:cloak], 
+[ng-cloak], 
+[data-ng-cloak], 
+[x-ng-cloak], 
+.ng-cloak, 
+.x-ng-cloak { 
+	display: none 
+}
+
+html, body {
+  height: 100%;
+}
+
+.wrap {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -50px auto;
+  padding: 0 0 50px 0;
+  min-width: 600px;
+}
+
+footer {
+	background: #2a2730;
+	color: #99979c;
+	font-size: 10px;
+	padding: 10px 0;
+	margin: auto;
+	height: 50px;
+	a {
+		color: #99979c;
+		text-decoration: none;
+		&:hover,
+		&:focus	{
+			text-decoration: underline;
+			color: #fff;
+		}
+	}
+}
+
+
+.app-name { 
+	font-family: 'Gloria Hallelujah', cursive; 
+	color: @appName; 
+	font-size: 16px;
+	font-weight: normal
+}
+
+/* home page  */
+
+h1 {
+	padding: 0px;
+	margin: 0px
+}
+h2 {
+	font-size: 18px;
+}
+h3 {
+	font-size: 16px;
+}
+.jumbotron {
+	background-color: #fff
+}
+.wavesurfer-region {
+	border: 1px solid @regionBorder
+}
+.modal-title {
+	font-weight: normal
+}
+
+.input-file {
+	input {
+		display: none
+	}
+}
+
+/* cut page */
+
+.stopwatch {
+	width: 120px;
+	font-size: 18px;	
+}
+input[type=range] {
+	width: 100%
+}
+
+.table_container {
+
+	max-height: 287px;
+	overflow-y: auto;
+	position: relative;
+	margin-bottom: 20px;
+	
+	
+	th {
+		font-size: 8px;
+		font-weight: normal;
+		text-align: center;
+		color: gray;		
+	}
+	tr {
+		input[type=text] {
+			width: 100%;
+		}
+		&.selected {
+			background-color: lighten(#FC8C05, 40%);
+		}
+		a { 
+			.glyphicon {
+				color: black;
+				&:hover,
+				&:focus {
+					color: @appName
+				}
+			}	
+		} 
+		.error {
+			position: relative;
+			height: 50px;
+			.text-danger {
+				position: absolute;
+				top: 32px;
+			}		
+			input {
+				border: 1px solid red;
+			}
+		}
+	}	
+} 
+
+/* animate */
+
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}

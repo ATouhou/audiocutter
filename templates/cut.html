@@ -1,0 +1,121 @@
+
+	<div class="alert alert-warning" role="alert" ng-show="processing">  
+		<i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i> 
+		&nbsp;&nbsp;The file has been uploaded successfully and is being processed now. Please, wait&hellip; 		
+	</div>
+
+	<div ng-show="!processing">
+		<div id="wave-timeline"></div>
+		<div id="waveform"></div>
+		<br>
+		<div class="well">
+			<div class="btn-group" role="group">
+			
+				<button ng-click="playPause()" type="button" class="btn btn-default"  title="Play/Pause">
+					<i class="glyphicon glyphicon-play" ng-show="!play"></i>
+					<i class="glyphicon glyphicon-pause" ng-show="play"></i>						
+				</button>
+							
+				<button ng-click="stop()" type="button" class="btn btn-default"  title="Stop">
+					<i class="glyphicon glyphicon-stop" ></i>		
+				</button>		
+
+				<button ng-click="divideOnPauseChange()" type="button" class="btn btn-default" ng-class="{'active':divideOnPause}"  title="Divide On Pause">
+					<i class="glyphicon" ng-class="{'glyphicon-unchecked': !divideOnPause, 'glyphicon-check': divideOnPause}"></i>&nbsp;&nbsp;
+					Divide On Pause
+				</button>
+				
+				<button ng-click="clearRegions()" type="button" class="btn btn-default"  title="Clear Regions" ng-show="tableLines.length > 0">
+					<i class="glyphicon glyphicon-remove"></i>
+					<span class="hidden-xs">&nbsp;&nbsp;Remove All</span>	
+				</button>	
+
+				<button ng-click="downloadAll()" type="button" class="btn btn-default"  title="Download All Regions" ng-show="tableLines.length > 0 && !downloadAllProcess && allRegionsValid">
+					<i class="glyphicon glyphicon-download-alt"></i>
+					<span class="hidden-xs">&nbsp;&nbsp;Download All</span>	
+				</button>	
+				<button type="button" class="btn btn-default"  title="Download All Regions" ng-show="tableLines.length > 0 && downloadAllProcess && allRegionsValid ">
+					<i class="glyphicon glyphicon-refresh glyphicon-refresh-animate" ></i>
+					<span class="hidden-xs">&nbsp;&nbsp;Download All</span>	
+				</button>				
+				
+				
+			</div>
+			<input class="pull-right form-control text-center stopwatch" type="text"  value="{{stopwatch}}"  readonly />
+		</div>
+
+		<div class="table_container">
+			<form name="regionsForm" novalidate >
+			<table class="table" ng-show="tableLines.length > 0">
+				<tr>	
+					<th>Time start</th>
+					<th>Time end</th>
+					<th>File Name</th>
+					<th>Play</th>
+					<th colspan="2">Move Start</th>	
+					<th colspan="2">Move End</th>
+					<th>Download</th>	
+					<th>Delete</th>
+				</tr>	
+			
+				<tr ng-repeat="region in tableLines" ng-class="{'selected': currentRegion == region.id}" id="{{region.id}}">
+					
+					<td>{{region.time_start}}</td>
+					<td>{{region.time_end}}</td>
+					<td ng-class="{'error' : validate(region.name) != '' }">
+						<input type="text" ng-model="region.name"  />
+						<span class="text-danger small">{{validate(region.name)}}</span>
+					</td>
+					<td class="text-center">
+						<a href="" ng-click="playRegion(region)"><i title="Play" class="glyphicon glyphicon-play-circle"></i></a>
+					</td>					
+					<td class="text-center">
+						<a href="" ng-click="changeStartLeft(region)"><i title="Move Start To The Left" class="glyphicon glyphicon-chevron-left"></i></a>
+					</td>				
+					<td class="text-center">
+						<a href="" ng-click="changeStartRight(region)"><i title="Move Start To The Right" class="glyphicon glyphicon-chevron-right"></i></a>
+					</td>
+					<td class="text-center">
+						<a href="" ng-click="changeEndtLeft(region)"><i title="Move End To The Left" class="glyphicon glyphicon-chevron-left"></i></a>
+					</td>
+					<td class="text-center">
+						<a href="" ng-click="changeEndRight(region)"><i title="Move End To The Right" class="glyphicon glyphicon-chevron-right"></i></a>
+					</td>				
+					<td class="text-center">
+						<a href="" ng-click="downloadRegion(region)" ng-hide="region.downloading || validate(region.name) != '' ">
+							<i title="Download" class="glyphicon glyphicon-download" ></i>
+						</a>
+						<a ng-show="region.downloading">
+							<i class="glyphicon glyphicon-refresh glyphicon-refresh-animate" ></i>
+						</a>						
+					</td>					
+					<td class="text-center">
+						<a href="" ng-click="deleteRegion(region)"><i title="Delete" class="glyphicon glyphicon-remove-circle"></i></a>
+					</td>
+					
+				</tr>
+			</table>
+			</form>	
+		</div>		
+	</div>
+	
+	<!-- Modal goBack -->
+	<div class="modal fade" role="dialog" id="backModal">
+		<div class="modal-dialog modal-md">
+		
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Back</h4>
+				</div>
+				<div class="modal-body">
+					<p>Changes will not be saved!</p>
+					<p>Are you sure, you wand to end work with current audio file?</p>				
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+					<button type="button" class="btn btn-primary" ng-click="goBack()">Yes</button>
+				</div>				
+			</div>
+		</div>
+	</div>
