@@ -30,6 +30,7 @@
 					<span class="hidden-xs">&nbsp;&nbsp;Remove All</span>	
 				</button>	
 
+				<!--
 				<button ng-click="downloadAll()" type="button" class="btn btn-default"  title="Download All Regions" ng-show="tableLines.length > 0 && !downloadAllProcess && allRegionsValid">
 					<i class="glyphicon glyphicon-download-alt"></i>
 					<span class="hidden-xs">&nbsp;&nbsp;Download All</span>	
@@ -38,10 +39,10 @@
 					<i class="glyphicon glyphicon-refresh glyphicon-refresh-animate" ></i>
 					<span class="hidden-xs">&nbsp;&nbsp;Download All</span>	
 				</button>				
-				
+				-->
 				
 			</div>
-			<input class="pull-right form-control text-center stopwatch" type="text"  value="{{stopwatch}}"  readonly />
+			<input class="pull-right form-control text-center stopwatch" type="text"  value="{{currentTime | watch}}"  readonly />
 		</div>
 
 		<div class="table_container">
@@ -60,8 +61,8 @@
 			
 				<tr ng-repeat="region in tableLines" ng-class="{'selected': currentRegion == region.id}" id="{{region.id}}">
 					
-					<td>{{region.time_start}}</td>
-					<td>{{region.time_end}}</td>
+					<td>{{region.time_start | watch}}</td>
+					<td>{{region.time_end | watch}}</td>
 					<td ng-class="{'error' : validate(region.name) != '' }">
 						<input type="text" ng-model="region.name"  />
 						<span class="text-danger small">{{validate(region.name)}}</span>

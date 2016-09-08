@@ -13,6 +13,7 @@ AudioSplitterApp.controller('HomeController', function($scope, $location){
 		$scope.error_upload = false;
 		$scope.error_format = false;	
 		if(typeof file == 'undefined') return false;
+		//console.log(file.size);
 		if(file.type == 'audio/mpeg' || file.type == 'audio/mp3') {
 				var formData = new FormData($('#upload_audio')[0]);
 				$.ajax({
@@ -73,7 +74,7 @@ AudioSplitterApp.controller('HomeController', function($scope, $location){
 		// divide on pause regime	
 		$scope.divideOnPause = true;
 		// default stopwatch value
-		$scope.stopwatch = helper.updateTime(0);
+		$scope.currentTime = 0;
 		// WaveSurfer is not ready
 		$scope.processing = true;
 		
@@ -93,7 +94,7 @@ AudioSplitterApp.controller('HomeController', function($scope, $location){
 		});
 		
 		// load audio
-	//	$scope.$root.uploaded_file = '../audio/11_22/groundhog_test.mp3';  // tmp
+		//$scope.$root.uploaded_file = '../audio/11_22/groundhog_test.mp3';  // tmp
 		wavesurfer.load($scope.$root.uploaded_file);
 		
 		// select region by dragging
@@ -255,7 +256,7 @@ AudioSplitterApp.controller('HomeController', function($scope, $location){
 		});
 		
 		wavesurfer.on('audioprocess', function () {
-			$scope.stopwatch = helper.updateTime(wavesurfer.getCurrentTime());
+			$scope.currentTime = wavesurfer.getCurrentTime();
 			$scope.$apply();
 		});		
 		

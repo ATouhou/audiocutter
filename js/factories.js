@@ -15,6 +15,7 @@
 				name = name.substring(0, dotPosition);
 				var slashPosition = name.lastIndexOf("/");
 				name = name.substring(slashPosition + 1);
+				name = name.replace(/\s+/g, '_');
 				return name;
 			},
 			// background color for selected regions
@@ -29,28 +30,6 @@
 					'rgba(255, 1, 205, '+opacity+')'
 				];
 				return colors[Math.floor((Math.random()*6)+0)];
-			},
-			// time view for stopwatch
-			updateTime: function(currentTime) {
-				if (typeof currentTime === 'undefined') currentTime = 0;
-
-				var hour = Math.floor(currentTime / 60 / 60);
-				currentTime -= hour * 60 * 60;
-
-				var minute = Math.floor(currentTime / 60);
-				currentTime -= minute * 60;
-
-				var second = Math.floor(currentTime);
-				currentTime -= second;
-
-				var milli = '' + Math.floor(currentTime * 1000);
-				
-				if (minute < 10) minute = '0' + minute;
-				if (second < 10) second = '0' + second;
-				while (milli.length < 3) {
-					milli = '0' + milli;
-				}
-				return hour + ':' + minute + ':' + second + '.' + milli;
 			},	
 			// get last region
 			getLastRegion: function(wavesurfer){
@@ -90,17 +69,18 @@
 					tableLines.push({
 						id:region.id, 
 						num:num, 
-						time_start : Math.round(region.start*20)/20,
-						time_end: Math.round(region.end*20)/20,
+						time_start : region.start,
+						time_end: region.end,						
 						name: this.fileName(uploaded_file) + '_' + num,
 						downloading: false
 					});
 				} else {
 					// Update position: change time limits in table when dragging or resizing is finished
+					var _this = this;
 					tableLines.forEach(function(item, i){
 						if(item.id == region.id) {
-							item.time_start = Math.round(region.start*20)/20;
-							item.time_end = Math.round(region.end*20)/20;
+							item.time_start = region.start;
+							item.time_end = region.end;
 							item.downloading = region.downloading;
 						}
 					});
