@@ -1,5 +1,5 @@
 
-			<div class="text-center jumbotron">
+				<div class="text-center">
 					<h2>Cut MP3 files into multiple tracks.</h2>
 					<h3>Split and download tracks with few clicks</h3>
 				</div>
@@ -32,3 +32,27 @@
 						</div> 						
 					
 				</div>
+				
+		<div class="alert alert-warning alert-dismissible fade in" role="alert" ng-controller="CutController" > 
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button> 
+			<p>How does it work? Try to cut test mp3 file.</p>
+			
+			<div ng-show="processing">  
+				<i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i> 
+				&nbsp;&nbsp;Please, wait a second while test file is processing&hellip; 		
+			</div>	
+				
+			<div ng-show="!processing" >
+				<p>You can cut the following file in two ways:</p>
+				<ul>
+					<li>Click and drag on the wave timeline</li>
+					<li>Click "Pause" <i class="glyphicon glyphicon-pause"></i> or press "Space" while listening (turn on regime" <i class="glyphicon glyphicon-check"></i> Divide on Pause")</li>
+				</ul>		
+				<div id="wave-timeline"></div>
+				<div id="waveform"></div>	
+				<wave-timeline-manage></wave-timeline-manage>		
+			</div>
+			
+		</div>					

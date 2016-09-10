@@ -9,4 +9,10 @@ AudioSplitterApp.directive("modalInfo", function(){
 		},
 	}
 })
-		
+.directive("waveTimelineManage", function(){
+	return {
+		restrict: 'E',	
+		replace: true,	
+		templateUrl: 'templates/wave-timeline-manage.html',
+	}
+})		

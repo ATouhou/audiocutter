@@ -62,7 +62,7 @@ AudioSplitterApp.controller('HomeController', function($scope, $location){
 })
 
 // cut audio file
-.controller('CutController', function($scope, $timeout, $location, helper){ 
+.controller('CutController', function($scope, $timeout, $location, $route, helper){ 
 		
 		$scope.$root.cut = true;
 		// start point (seconds) of selected region (regime divide on pause)
@@ -77,6 +77,11 @@ AudioSplitterApp.controller('HomeController', function($scope, $location){
 		$scope.currentTime = 0;
 		// WaveSurfer is not ready
 		$scope.processing = true;
+		
+		if($route.current.testFile) {
+			$scope.$root.uploaded_file = $route.current.testFile;
+			$scope.$root.cut = false;
+		}
 		
 		/* start */
 				
@@ -94,7 +99,6 @@ AudioSplitterApp.controller('HomeController', function($scope, $location){
 		});
 		
 		// load audio
-		//$scope.$root.uploaded_file = '../audio/11_22/groundhog_test.mp3';  // tmp
 		wavesurfer.load($scope.$root.uploaded_file);
 		
 		// select region by dragging

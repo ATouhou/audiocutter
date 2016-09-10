@@ -90,7 +90,7 @@
 			// validate region name
 			validate: function(input){
 				if(typeof(input) == 'undefined') input = '';
-				if (!/^[\w]+$/i.test(input) && input != '') return 'Only A-Z, 0-9, _ symbols are available!';
+				if (!/^[\w-]+$/i.test(input) && input != '') return 'Only A-Z, 0-9, _ symbols are available!';
 				else if (input == '') return 'The value must not be empty!';
 				else if (input.length > 30) return 'The length of th name is to long';
 				else return '';				
