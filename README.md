@@ -1,5 +1,5 @@
 # Easy Multiple Audio Splitter application for MP3 files
-<a href="http://audiocutter.lirk.in.ua/">audiocutter.lirk.in.ua</a><br>
+<a href="http://www.audiocutter.ileft.s-host.net/">audiocutter.ileft.s-host.net</a><br>
 
 Simple experimental web based audio editor
 
